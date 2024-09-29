@@ -5,6 +5,7 @@ import 'screens/task_list_screen.dart';
 import 'screens/task_form_screen.dart';
 
 void main() {
+  print("URL do Backend: https://35.209.196.164:3000"); // Adicione este print para verificar no console
   runApp(MyApp());
 }
 

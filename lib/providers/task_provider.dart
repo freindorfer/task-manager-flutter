@@ -8,7 +8,7 @@ class TaskProvider with ChangeNotifier {
 
   List<Task> get tasks => _tasks;
 
-  final String apiUrl = 'http://35.209.196.164:3000'; // URL do backend
+  final String apiUrl = 'https://35.209.196.164:3000'; // URL do backend
 
   // Buscar todas as tarefas do backend
   Future<void> fetchTasks() async {
