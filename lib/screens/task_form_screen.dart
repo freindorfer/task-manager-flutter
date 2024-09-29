@@ -51,7 +51,7 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
           description: _descriptionController.text,
           dueDate: _selectedDate,
         );
-        await Provider.of<TaskProvider>(context, listen: false).addTask(newTask);
+        await Provider.of<TaskProvider>(context, listen: false).addTask(newTask.title, newTask.description, newTask.dueDate);
       }
 
       // Atualizar lista de tarefas e retornar à tela inicial

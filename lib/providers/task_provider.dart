@@ -27,24 +27,30 @@ class TaskProvider with ChangeNotifier {
   }
 
   // Adicionar uma nova tarefa
-  Future<void> addTask(Task task) async {
-    try {
-      final response = await http.post(
-        Uri.parse('$apiUrl/tasks'),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode(task.toJson()),
-      );
+Future<void> addTask(String title, String description, DateTime dueDate) async {
+  final url = Uri.parse('$apiUrl/tasks');
+  try {
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'title': title,
+        'description': description,
+        'dueDate': dueDate.toIso8601String(),
+      }),
+    );
 
-      if (response.statusCode == 201) {
-        _tasks.add(task);
-        notifyListeners();
-      } else {
-        throw Exception('Erro ao adicionar a tarefa');
-      }
-    } catch (error) {
-      throw Exception('Erro ao conectar com o backend: $error');
+    if (response.statusCode == 200) {
+      print('Tarefa criada com sucesso: ${response.body}');
+    } else {
+      print('Erro ao adicionar a tarefa: ${response.statusCode} - ${response.body}');
+      throw Exception('Erro ao adicionar a tarefa');
     }
+  } catch (error) {
+    print('Erro ao conectar com o backend: $error');
+    throw Exception('Erro ao conectar com o backend: $error');
   }
+}
 
   // Editar uma tarefa existente
   Future<void> updateTask(Task task) async {
